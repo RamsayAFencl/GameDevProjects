@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/shaders/orangeColor.tres" type="Material" id=1]
+
+[node name="GunMag1" type="Spatial"]
+
+[node name="CSGPolygon" type="CSGPolygon" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0754919, -0.2, 0.04 )
+polygon = PoolVector2Array( 0, 0, 0.025, 0.1, 0, 0.2, 0.15, 0.2, 0.175, 0.1, 0.15, 0 )
+depth = 0.08
+material = ExtResource( 1 )

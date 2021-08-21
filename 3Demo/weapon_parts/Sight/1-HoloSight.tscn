@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://data/shaders/fire3d.shader" type="Shader" id=1]
+[ext_resource path="res://data/shaders/gunMetal.tres" type="Material" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/root_color = Color( 1, 0.75, 0.3, 1 )
+shader_param/tip_color = Color( 1, 0.03, 0.001, 1 )
+shader_param/fire_alpha = 0.264
+shader_param/fire_speed = 1.0
+shader_param/fire_aperture = 0.667
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/root_color = Color( 1, 0.75, 0.3, 1 )
+shader_param/tip_color = Color( 1, 0.03, 0.001, 1 )
+shader_param/fire_alpha = 0.115
+shader_param/fire_speed = 1.0
+shader_param/fire_aperture = 0.22
+
+[sub_resource type="PlaneMesh" id=3]
+material = SubResource( 2 )
+size = Vector2( 0.09, 0.09 )
+
+[node name="GunSight1" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0 )
+width = 0.1
+height = 0.1
+depth = 0.1
+material = ExtResource( 2 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGBox"]
+operation = 2
+width = 0.1
+height = 0.08
+depth = 0.08
+material = ExtResource( 2 )
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGBox"]
+radius = 0.005
+radial_segments = 4
+rings = 2
+material = SubResource( 1 )
+
+[node name="CSGMesh" type="CSGMesh" parent="CSGBox"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
+mesh = SubResource( 3 )

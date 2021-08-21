@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://data/shaders/gunMetal.tres" type="Material" id=1]
+[ext_resource path="res://data/shaders/fire3d.shader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/root_color = Color( 1, 0.75, 0.3, 1 )
+shader_param/tip_color = Color( 1, 0.03, 0.001, 1 )
+shader_param/fire_alpha = 1.0
+shader_param/fire_speed = 1.0
+shader_param/fire_aperture = 0.22
+
+[node name="LeftAttachLight1" type="Spatial"]
+
+[node name="CSGCylinder" type="CSGCylinder" parent="."]
+transform = Transform( -4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0, 0, 0.0252904 )
+radius = 0.05
+height = 0.1
+sides = 3
+material = ExtResource( 1 )
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="."]
+transform = Transform( -4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, -0.0177434, 0, 0.0252904 )
+radius = 0.02
+height = 0.15
+sides = 7
+material = ExtResource( 1 )
+
+[node name="CSGCylinder3" type="CSGCylinder" parent="CSGCylinder2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72529e-09, 0.0765952, 0 )
+operation = 2
+radius = 0.015
+height = 0.01
+sides = 7
+material = SubResource( 1 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0750392, 0, 0.0804513 )
+visible = false
+spot_range = 50.0
+spot_angle = 10.0

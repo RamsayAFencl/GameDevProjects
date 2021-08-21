@@ -1,0 +1,205 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://data/textures/Prototype/texture_01.png" type="Texture" id=1]
+[ext_resource path="res://scenes/BallPlayerController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/DumbCamera.gd" type="Script" id=3]
+[ext_resource path="res://data/shaders/orangeColor.tres" type="Material" id=4]
+[ext_resource path="res://scenes/movetest.gd" type="Script" id=5]
+[ext_resource path="res://data/textures/Prototype/texture_09.png" type="Texture" id=6]
+
+[sub_resource type="Environment" id=1]
+dof_blur_near_quality = 2
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 1 )
+uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[node name="GravityBallTestWorld" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 25.5, 0 )
+environment = SubResource( 1 )
+fov = 13.0
+script = ExtResource( 3 )
+target = NodePath("../BallPlayerController")
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11282, 0 )
+light_energy = 0.7
+
+[node name="1x1 base cube" type="CSGBox" parent="."]
+visible = false
+use_collision = true
+width = 1.0
+height = 1.0
+depth = 1.0
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Box" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, 0 )
+use_collision = true
+width = 51.0
+height = 51.0
+depth = 51.0
+material = SubResource( 2 )
+
+[node name="BoxCutout" type="CSGBox" parent="Geometry/Box"]
+operation = 2
+use_collision = true
+width = 50.0
+height = 50.0
+depth = 50.0
+material = SubResource( 2 )
+
+[node name="CSGBox2" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+use_collision = true
+width = 1.0
+height = 1.0
+depth = 1.0
+script = ExtResource( 5 )
+
+[node name="CSGBox3" type="CSGBox" parent="Geometry"]
+transform = Transform( 9.10239, 0, 0, 0, 3, 0, 0, 0, 1, 1.328, 2, -18.6451 )
+use_collision = true
+width = 1.0
+height = 1.0
+depth = 1.0
+
+[node name="CSGBox4" type="CSGBox" parent="Geometry"]
+transform = Transform( 20, 0, 0, 0, 7, 0, 0, 0, 1, 0, 4, 15 )
+use_collision = true
+width = 1.0
+height = 1.0
+depth = 1.0
+
+[node name="CSGBox5" type="CSGBox" parent="Geometry"]
+transform = Transform( 7, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 14 )
+use_collision = true
+width = 1.0
+height = 1.0
+depth = 1.0
+material = ExtResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 5, 6, 3, 12 )
+use_collision = true
+width = 1.0
+height = 1.0
+depth = 1.0
+material = ExtResource( 4 )
+
+[node name="CSGBox7" type="CSGBox" parent="Geometry"]
+transform = Transform( 15, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 10 )
+use_collision = true
+width = 1.0
+height = 1.0
+depth = 1.0
+material = ExtResource( 4 )
+
+[node name="CSGBox8" type="CSGBox" parent="Geometry"]
+transform = Transform( 0.410735, 0, 0.911755, 0, 1, 0, -0.911755, 0, 0.410735, 10, 2.5, 2 )
+use_collision = true
+width = 4.0
+height = 4.0
+depth = 4.0
+
+[node name="CSGBox9" type="CSGBox" parent="Geometry"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 20, 2.5, 2 )
+use_collision = true
+width = 4.0
+height = 4.0
+depth = 4.0
+
+[node name="CSGBox10" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9601, 5.5, -12.5455 )
+use_collision = true
+width = 10.0
+height = 10.0
+depth = 4.0
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Geometry/CSGBox10"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.72205e-06, -0.437857, 4.76837e-07 )
+operation = 2
+radius = 7.0
+height = 5.0
+sides = 20
+cone = true
+
+[node name="RigidBody" type="RigidBody" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.302, 4, 0 )
+
+[node name="CSGBox4" type="CSGBox" parent="Geometry/RigidBody"]
+width = 1.0
+height = 1.0
+depth = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/RigidBody"]
+shape = SubResource( 3 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 7.5, 15 )
+use_collision = true
+radius = 2.942
+radial_segments = 20
+rings = 20
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 12, 7.5, 15 )
+use_collision = true
+height = 20.0
+
+[node name="BallPlayerController" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11901, 5.12986, -20.9327 )
+
+[node name="Controls" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton5" type="TouchScreenButton" parent="Controls"]
+position = Vector2( -213.734, -195.02 )
+scale = Vector2( 0.08, 0.08 )
+normal = ExtResource( 6 )
+shape_centered = false
+passby_press = true
+action = "move_up"
+visibility_mode = 1
+
+[node name="TouchScreenButton6" type="TouchScreenButton" parent="Controls"]
+position = Vector2( -304.503, -146.298 )
+scale = Vector2( 0.08, 0.08 )
+normal = ExtResource( 6 )
+shape_centered = false
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+
+[node name="TouchScreenButton7" type="TouchScreenButton" parent="Controls"]
+position = Vector2( -122.297, -146.965 )
+scale = Vector2( 0.08, 0.08 )
+normal = ExtResource( 6 )
+shape_centered = false
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+
+[node name="TouchScreenButton8" type="TouchScreenButton" parent="Controls"]
+position = Vector2( -213.734, -104.918 )
+scale = Vector2( 0.08, 0.08 )
+normal = ExtResource( 6 )
+shape_centered = false
+passby_press = true
+action = "move_down"
+visibility_mode = 1

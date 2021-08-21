@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://data/shaders/gunMetal.tres" type="Material" id=7]
+[ext_resource path="res://data/shaders/orangeColor.tres" type="Material" id=8]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.25, 0.12, 0.05 )
+
+[node name="Revolver" type="RigidBody"]
+
+[node name="Attachments" type="Spatial" parent="."]
+
+[node name="Grip" type="Position3D" parent="Attachments"]
+transform = Transform( 0.969779, -0.243987, 0, 0.243987, 0.969779, 0, 0, 0, 1, 0.114224, -0.0110289, 0 )
+
+[node name="Cylinder" type="Position3D" parent="Attachments"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00123693, 0.00778798, 0 )
+
+[node name="Barrel" type="Position3D" parent="Attachments"]
+transform = Transform( 0.699, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -0.098, 0, 0 )
+
+[node name="Sight" type="Position3D" parent="Attachments"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0322324, 0.0784229, 0.000145465 )
+
+[node name="LeftAttachment" type="Position3D" parent="Attachments"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0495345, -0.0661464, 0.0338068 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 0.999036, 0, 0, 0, 0.999036, 0, 0, 0, 0.999036, 0, 0, 0 )
+width = 0.207
+height = 0.1
+depth = 0.08
+material = ExtResource( 7 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="CSGBox"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.0454551, 0.0158627, 0 )
+operation = 2
+radius = 0.06
+height = 0.1
+material = ExtResource( 7 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0433358, -0.0673835, 0 )
+width = 0.1
+height = 0.0430638
+depth = 0.0695277
+material = ExtResource( 7 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGBox"]
+transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, -0.01, 0.052, 0.031 )
+operation = 2
+width = 0.308397
+height = 0.02
+depth = 0.0695277
+material = ExtResource( 7 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGBox"]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.01, 0.052, -0.031 )
+operation = 2
+width = 0.308397
+height = 0.02
+depth = 0.0695277
+material = ExtResource( 7 )
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122112, 0.00759894, 0 )
+radius = 0.0402117
+material = ExtResource( 7 )
+
+[node name="CSGPolygon" type="CSGPolygon" parent="CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.305282, 0.0328524, 0.0401286 )
+polygon = PoolVector2Array( 0, 0, 0, 0.032, 0.25, 0.032, 0.29, 0.05, 0.417, 0.05, 0.45, 0 )
+depth = 0.08
+material = ExtResource( 7 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGBox/CSGPolygon"]
+transform = Transform( 10.5497, 0, 0, 0, 1, 0, 0, 0, 1, 0.201961, -0.0212288, -0.04 )
+operation = 2
+width = 0.044
+height = 0.07
+depth = 0.062
+
+[node name="CSGBox2" type="CSGBox" parent="CSGBox/CSGPolygon"]
+transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.220498, 0.0405266, -0.00495544 )
+operation = 2
+width = 0.472943
+height = 0.02
+depth = 0.0695277
+material = ExtResource( 8 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGBox/CSGPolygon"]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.22, 0.041, -0.075 )
+operation = 2
+width = 0.472943
+height = 0.02
+depth = 0.0695277
+material = ExtResource( 8 )
+
+[node name="CSGPolygon" type="CSGPolygon" parent="CSGBox/CSGPolygon"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.299366, 0, 0.00316647 )
+operation = 2
+polygon = PoolVector2Array( 0, 0, 0.015, 0.02, 0.09, 0.02, 0.105, 0 )
+depth = 0.1
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="CSGBox"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 0.721, -0.0592985, 0, 0 )
+radius = 0.068
+height = 0.117
+material = ExtResource( 7 )
